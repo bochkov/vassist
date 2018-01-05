@@ -1,0 +1,59 @@
+<div class="container">
+    <form method="POST" ng-submit="calculate('/primary/thermometr/')" class="form-horizontal col-sm-6">
+        <h2>Исходные данные</h2>
+        <div class="form-group">
+            <label for="begin" class="col-sm-5 control-label">Начальная точка, &deg;C</label>
+            <div class="col-sm-7">
+                <input type="number" step="0.001" id="begin" required="true" ng-model="form.tbegin" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="end" class="col-sm-5 control-label">Конечная точка, &deg;C</label>
+            <div class="col-sm-7">
+                <input type="number" step="0.001" id="end" required="true" ng-model="form.tend" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="every" class="col-sm-5 control-label">Через каждые, &deg;C</label>
+            <div class="col-sm-7">
+                <input type="number" step="0.001" id="every" required="true" ng-model="form.tevery" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="t0" class="col-sm-5 control-label">Показания при 0 &deg;C, мВ</label>
+            <div class="col-sm-7">
+                <input type="number" step="0.001" id="t0" required="true" ng-model="form.t0" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="t100" class="col-sm-5 control-label">Показания при 100 &deg;C, мВ</label>
+            <div class="col-sm-7">
+                <input type="number" step="0.001" id="t100" required="true" ng-model="form.t100" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-7">
+                <button type="submit" class="btn btn-primary" no-blur>Расчет</button>
+            </div>
+        </div>
+    </form>
+
+    <ng-include src="'pages/error.html'"></ng-include>
+
+    <div class="clearfix"></div>
+
+    <div ng-if="show" class="col-sm-8">
+        <h2>Результаты</h2>
+        <table class="table table-bordered table-striped text-center">
+            <tr>
+                <th></th>
+                <th ng-repeat="col in dt.colHeader" ng-bind="col|number:2"></th>
+            </tr>
+            <tr ng-repeat="row in dt.rowHeader">
+                <th ng-bind="row|number:2"></th>
+                <td ng-repeat="v in dt.matrix[$index] track by $index" ng-bind="v == NaN ? '' : v|number:3"></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
