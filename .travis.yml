@@ -20,5 +20,5 @@ before_install:
 script:
   - docker --version
   - docker build -t vassist .
-  - docker tag meters:latest 902382300595.dkr.ecr.us-east-1.amazonaws.com/vassist:latest
+  - docker tag vassist:latest 902382300595.dkr.ecr.us-east-1.amazonaws.com/vassist:latest
   - docker push 902382300595.dkr.ecr.us-east-1.amazonaws.com/vassist:latest
