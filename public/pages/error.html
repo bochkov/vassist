@@ -1,11 +1,12 @@
-<div ng-if="error" class="col-sm-offset-1 col-sm-5">
-    <h2>Возникли ошибки</h2>
-    <dl>
+<div ng-if="error" class="ui negative message">
+    <!-- <dl>
         <dt>Timestamp</dt><dd ng-bind="error.timestamp|date:'dd MMM yyyy, HH:mm:ss.sss'"></dd>
         <dt>Status</dt><dd ng-bind="error.status"></dd>
         <dt>Error</dt><dd ng-bind="error.error"></dd>
         <dt>Path</dt><dd ng-bind="error.path"></dd>
         <dt>Exception</dt><dd ng-bind="error.exception"></dd>
         <dt>Message</dt><dd ng-bind="error.message"></dd>
-    </dl>
+    </dl> -->
+    <div class="ui small header">{{error.status}} {{error.statusText}}</div>
+    <p>{{error.data.error}}</p>
 </div>

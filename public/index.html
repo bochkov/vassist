@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html ng-app="assistant">
-    <head>
-        <meta charset="utf-8" />
-        <title>Помощник по поверке</title>
-        <link rel="stylesheet" href="static/css/bootstrap.min.css">
-        <link rel="stylesheet" href="static/css/style.css">
-        <link rel="icon" type="image/png" href="/static/img/favicon.png" />
-        <script src="static/js/angular.min.js"></script>
-        <script src="static/js/angular-route.min.js"></script>
-        <script src="static/js/script.js"></script>
-    </head>
-    <body class="container">
-        <header ng-controller="headerController">
-            <h1><a href="/" no-blur>Помощник по поверке</a></h1>
-            <hr/>
-            <ul class="nav nav-pills">
-                <li ng-class="{'active': location.path() == '/primary/thermocouple'}">
-                    <a href="#!/primary/thermocouple" no-blur>Поверка термопар</a>
-                </li>
-                <li ng-class="{'active': location.path() == '/primary/thermometr'}">
-                    <a href="#!/primary/thermometr" no-blur>Градуировка термометров сопротивления</a>
-                </li>
-                <li ng-class="{'active': location.path() == '/secondary'}">
-                    <a href="#!/secondary" no-blur>Поверка вторичных приборов</a>
-                </li>
-                <li ng-class="{'active': location.path() == '/about'}" class="pull-right">
-                    <a href="#!/about" no-blur>О сервисе</a>
-                </li>
-            </ul>
-            <hr/>
-        </header>
-        <div id="main">
-            <div ng-view></div>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Помощник по поверке</title>
+    <link rel="icon" type="image/png" href="/static/img/favicon.png" />
+    <link rel="stylesheet" href="static/css/semantic.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="static/js/jquery-3.2.1.min.js"></script>
+    <script src="static/js/semantic.min.js"></script>
+    <script src="static/js/angular.min.js"></script>
+    <script src="static/js/angular-route.min.js"></script>
+    <script src="static/js/script.js"></script>
+</head>
+
+<body class="ui container">
+    <header ng-controller="headerController">
+        <h1>
+            <a href="/">Помощник по поверке</a>
+        </h1>
+        <div class="ui secondary pointing menu">
+            <a class="item" ng-class="{'active': location.path() == '/primary/thermocouple'}" href="#!/primary/thermocouple">Поверка термопар</a>
+            <a class="item" ng-class="{'active': location.path() == '/primary/thermometr'}" href="#!/primary/thermometr">Градуировка термометров сопротивления</a>
+            <a class="item" ng-class="{'active': location.path() == '/secondary'}" href="#!/secondary">Поверка вторичных приборов</a>
+            <div class="right menu">
+                <a class="item" ng-class="{'active': location.path() == '/about'}" href="#!/about">О сервисе</a>
+            </div>
         </div>
-    </body>
+    </header>
+    <div class="ui hidden divider"></div>
+    <div ng-view></div>
+</body>
+
 </html>

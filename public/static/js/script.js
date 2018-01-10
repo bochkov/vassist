@@ -16,19 +16,6 @@ assistant.directive(
         };
     }
 );
-assistant.directive(
-    'noBlur',
-    function() {
-        return {
-            restrict: 'A',
-            link: function(scope, element) {
-                element.on('click', function() {
-                    element[0].blur();
-                });
-            }
-        }
-    }
-);
 
 assistant.config(
     function($routeProvider) {
@@ -72,16 +59,24 @@ assistant.controller(
         $scope.show = false;
         $scope.form = {};
         $scope.grads = {}
-
         $scope.loadGrads = function() {
             $http.get("/api/grads/thermocouples/")
                 .then(function(data) {
                     $scope.grads = data.data;
+                    jQuery("select.dropdown").dropdown();
                 });
         };
-
-        
-
+        $scope.calculate = function(url) {
+            $http.post(url, $scope.form)
+                .then(function(data) {
+                    $scope.error = false;
+                    $scope.show = true;
+                    $scope.dt = data.data;
+                }, function(data) {
+                    $scope.show = false;
+                    $scope.error = data;
+                });
+        };
         $scope.loadGrads();
     }
 );
@@ -92,7 +87,6 @@ assistant.controller(
         $scope.show = false;
         $scope.form = {};
         $scope.grads = {}
-
         $scope.calculate = function(url) {
             $http.post(url, $scope.form)
                 .then(function(data) {
@@ -113,14 +107,13 @@ assistant.controller(
         $scope.show = false;
         $scope.form = {};
         $scope.grads = {}
-
         $scope.loadGrads = function() {
             $http.get("/api/grads/all/")
                 .then(function(data) {
                     $scope.grads = data.data;
+                    jQuery(".ui.dropdown").dropdown();
                 });
         };
-
         $scope.calculate = function(url) {
             $http.post(url, $scope.form)
                 .then(function(data) {
@@ -132,7 +125,6 @@ assistant.controller(
                     $scope.error = data;
                 });
         };
-
         $scope.loadGrads();
     }
 );
