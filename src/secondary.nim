@@ -54,6 +54,6 @@ proc calc*(th : JsonSecondary) : JsonNode =
         i += th.every
     return
         %CalcResult(
-            ed: grad.ed(),
+            ed: $grad.ed(),
             result: resseq
         )

@@ -10,6 +10,7 @@ type
 
 proc name*(gr : Graduation) : cstring {. dynlib:"libthermo.so" importc:"th_name" .}
 proc desciption*(gr : Graduation) : cstring {. dynlib:"libthermo.so" importc:"th_description" .}
+proc ed*(gr : Graduation) : cstring {. dynlib:"libthermo.so" importc:"th_ed" .}
 
 proc value0(gr : Graduation, temp : float) : ThRes {. dynlib:"libthermo.so" importc:"th_value" .}
 proc temp0(gr : Graduation, value : float) : ThRes {. dynlib:"libthermo.so" importc:"th_temp" .}
@@ -94,14 +95,6 @@ proc allGrads*() : JsonNode =
     res.add(thermocouples())
     res.add(thermometers())
     return res
-
-proc ed*(th : Graduation) : string =
-    if th is Thermocouple:
-        return "мВ"
-    elif th is Thermometr:
-        return "Ом"
-    else:
-        return ""
 
 proc grad*(name : string) : Graduation =
     case name:
