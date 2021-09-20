@@ -1,8 +1,7 @@
 import json
-import macros
 
 type
-    ResException* = object of Exception
+    ResException* = object of ValueError
     ThRes = ref object of RootObj
     Graduation* = ref object of RootObj
     Thermocouple* = ref object of Graduation

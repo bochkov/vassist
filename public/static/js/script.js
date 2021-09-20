@@ -1,13 +1,13 @@
 var assistant = angular.module('assistant', ['ngRoute']);
 
 assistant.directive(
-    'convertToNumber', 
+    'convertToFloat', 
     function() {
         return {
             require: 'ngModel',
             link: function(scope, element, attrs, ngModel) {
                 ngModel.$parsers.push(function(val) {
-                    return parseInt(val, 10);
+                    return parseFloat(val);
                 });
                 ngModel.$formatters.push(function(val) {
                     return '' + val;
