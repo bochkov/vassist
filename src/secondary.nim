@@ -15,6 +15,7 @@ type
         vis, sig : Diapason
     CalcResult = ref object of RootObj
         ed : string
+        deltaVis, deltaSig: float
         result: seq[Result]
 
 proc newJsonSecondary*(json : JsonNode) : JsonSecondary =
@@ -55,5 +56,7 @@ proc calc*(th : JsonSecondary) : JsonNode =
     return
         %CalcResult(
             ed: $grad.ed(),
+            deltaVis: deltaVis,
+            deltaSig: deltaSig,
             result: resseq
         )

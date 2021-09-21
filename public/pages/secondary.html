@@ -53,6 +53,14 @@
     <ng-include src="'pages/error.html'"></ng-include>
 
     <div ng-if="show" class="col-sm-8">
+        <h2>Вычисленная погрешность</h2>
+        <dl>
+            <dt>Погрешность измерений, мВ</dt>
+            <dd>&plusmn;{{dt.deltaVis|number:3}}</dd>
+        
+            <dt>Погрешность сигнализации, мВ</dt>
+            <dd>&plusmn;{{dt.deltaSig|number:3}}</dd>
+        </dl>
         <h2>Результаты</h2>
         <table class="ui very compact table center aligned">
             <thead>
