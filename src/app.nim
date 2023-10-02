@@ -6,7 +6,7 @@ import "source"
 import "thermometr", "thermocouple", "secondary"
 
 let 
-  cpars : seq[TaintedString] = commandLineParams()
+  cpars : seq[string] = commandLineParams()
 
 var level = lvlInfo
 if cpars.contains("-debug"):
