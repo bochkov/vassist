@@ -32,7 +32,7 @@
 
     <div ng-if="show" class="results">
         <h2>Результаты</h2>
-        <table class="ui very compact table center aligned">
+        <table class="ui very compact celled definition table center aligned">
             <thead>
                 <tr>
                     <th></th>
@@ -41,7 +41,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="row in dt.rowHeader">
-                    <th ng-bind="row|number:2"></th>
+                    <td ng-bind="row|number:2"></td>
                     <td ng-repeat="v in dt.matrix[$index] track by $index" ng-bind="v == NaN ? '' : v|number:3"></td>
                 </tr>
             </tbody>

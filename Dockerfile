@@ -8,7 +8,7 @@ FROM nimlang/nim:alpine AS builder2
 RUN apk add --no-cache build-base
 COPY src .
 RUN nimble install jester -y
-RUN nim c -d:release app.nim
+RUN nim c --mm:refc -d:release app.nim
 
 FROM alpine:latest
 RUN apk add --no-cache pcre-dev && ln -s /usr/lib/libpcre.so /usr/lib/libpcre.so.3

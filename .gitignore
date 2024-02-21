@@ -1,4 +1,4 @@
 nimcache/
 build/
-libthermo.so
+libthermo.*
 .DS_Store

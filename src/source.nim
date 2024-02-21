@@ -1,5 +1,10 @@
 import json
 
+const
+    libthermo = when defined windows: "libthermo.dll" 
+                elif defined macosx: "libthermo.dylib" 
+                else: "libthermo.so"
+
 type
     ResException* = object of ValueError
     ThRes = ref object of RootObj
@@ -7,16 +12,16 @@ type
     Thermocouple* = ref object of Graduation
     Thermometr* = ref object of Graduation
 
-proc name*(gr : Graduation) : cstring {. dynlib:"libthermo.so" importc:"th_name" .}
-proc desciption*(gr : Graduation) : cstring {. dynlib:"libthermo.so" importc:"th_description" .}
-proc ed*(gr : Graduation) : cstring {. dynlib:"libthermo.so" importc:"th_ed" .}
+proc name*(gr : Graduation) : cstring {. cdecl dynlib:libthermo importc:"th_name" .}
+proc desciption*(gr : Graduation) : cstring {. cdecl dynlib:libthermo importc:"th_description" .}
+proc ed*(gr : Graduation) : cstring {. cdecl dynlib:libthermo importc:"th_ed" .}
 
-proc value0(gr : Graduation, temp : float) : ThRes {. dynlib:"libthermo.so" importc:"th_value" .}
-proc temp0(gr : Graduation, value : float) : ThRes {. dynlib:"libthermo.so" importc:"th_temp" .}
+proc value0(gr : Graduation, temp : float) : ThRes {. cdecl dynlib:libthermo importc:"th_value" .}
+proc temp0(gr : Graduation, value : float) : ThRes {. cdecl dynlib:libthermo importc:"th_temp" .}
 
-proc success(res : ThRes) : bool {. dynlib:"libthermo.so" importc:"tres_success" .}
-proc val(res : ThRes) : float {. dynlib:"libthermo.so" importc:"tres_val" .}
-proc err(res : ThRes) : cstring {. dynlib:"libthermo.so" importc:"tres_err" .}
+proc success(res : ThRes) : bool {. cdecl dynlib:libthermo importc:"tres_success" .}
+proc val(res : ThRes) : float {. cdecl dynlib:libthermo importc:"tres_val" .}
+proc err(res : ThRes) : cstring {. cdecl dynlib:libthermo importc:"tres_err" .}
 
 proc value*(gr : Graduation, temp : float) : float =
     var res : ThRes = gr.value0(temp)
@@ -47,19 +52,19 @@ type
     VRA2* = ref object of Thermocouple
     VRA3* = ref object of Thermocouple
 
-proc newJKJ*() : JKJ {. dynlib:"libthermo.so" importc:"th_new_jkj" .}
-proc newMKM*() : MKM {. dynlib:"libthermo.so" importc:"th_new_mkm" .}
-proc newMKT*() : MKT {. dynlib:"libthermo.so" importc:"th_new_mkt" .}
-proc newNNN*() : NNN {. dynlib:"libthermo.so" importc:"th_new_nnn" .}
-proc newPPR*() : PPR {. dynlib:"libthermo.so" importc:"th_new_ppr" .}
-proc newPPS*() : PPS {. dynlib:"libthermo.so" importc:"th_new_pps" .}
-proc newPRB*() : PRB {. dynlib:"libthermo.so" importc:"th_new_prb" .}
-proc newXAK*() : XAK {. dynlib:"libthermo.so" importc:"th_new_xak" .}
-proc newXKL*() : XKL {. dynlib:"libthermo.so" importc:"th_new_xkl" .}
-proc newXKnE*() : XKnE {. dynlib:"libthermo.so" importc:"th_new_xkne" .}
-proc newVRA1*() : VRA1 {. dynlib:"libthermo.so" importc:"th_new_vra1" .}
-proc newVRA2*() : VRA2 {. dynlib:"libthermo.so" importc:"th_new_vra2" .}
-proc newVRA3*() : VRA3 {. dynlib:"libthermo.so" importc:"th_new_vra3" .}
+proc newJKJ*() : JKJ {. cdecl dynlib:libthermo importc:"th_new_jkj" .}
+proc newMKM*() : MKM {. cdecl dynlib:libthermo importc:"th_new_mkm" .}
+proc newMKT*() : MKT {. cdecl dynlib:libthermo importc:"th_new_mkt" .}
+proc newNNN*() : NNN {. cdecl dynlib:libthermo importc:"th_new_nnn" .}
+proc newPPR*() : PPR {. cdecl dynlib:libthermo importc:"th_new_ppr" .}
+proc newPPS*() : PPS {. cdecl dynlib:libthermo importc:"th_new_pps" .}
+proc newPRB*() : PRB {. cdecl dynlib:libthermo importc:"th_new_prb" .}
+proc newXAK*() : XAK {. cdecl dynlib:libthermo importc:"th_new_xak" .}
+proc newXKL*() : XKL {. cdecl dynlib:libthermo importc:"th_new_xkl" .}
+proc newXKnE*() : XKnE {. cdecl dynlib:libthermo importc:"th_new_xkne" .}
+proc newVRA1*() : VRA1 {. cdecl dynlib:libthermo importc:"th_new_vra1" .}
+proc newVRA2*() : VRA2 {. cdecl dynlib:libthermo importc:"th_new_vra2" .}
+proc newVRA3*() : VRA3 {. cdecl dynlib:libthermo importc:"th_new_vra3" .}
 
 type
     Pt* = ref object of Thermometr
@@ -67,10 +72,10 @@ type
     TSN* = ref object of Thermometr
     TSP* = ref object of Thermometr
 
-proc newPt*(r : float) : Pt {. dynlib:"libthermo.so" importc:"th_new_pt" .}
-proc newTSM*(r : float) : TSM {. dynlib:"libthermo.so" importc:"th_new_tsm" .}
-proc newTSN*(r : float) : TSN {. dynlib:"libthermo.so" importc:"th_new_tsn" .}
-proc newTSP*(r : float) : TSP {. dynlib:"libthermo.so" importc:"th_new_tsp" .}
+proc newPt*(r : float) : Pt {. cdecl dynlib:libthermo importc:"th_new_pt" .}
+proc newTSM*(r : float) : TSM {. cdecl dynlib:libthermo importc:"th_new_tsm" .}
+proc newTSN*(r : float) : TSN {. cdecl dynlib:libthermo importc:"th_new_tsn" .}
+proc newTSP*(r : float) : TSP {. cdecl dynlib:libthermo importc:"th_new_tsp" .}
 
 proc `%=`(gr : Graduation) : JsonNode =
     return %* {"name": $gr.name()}
