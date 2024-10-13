@@ -115,6 +115,12 @@ assistant.controller(
                 });
         };
         $scope.calculate = function(url) {
+            if ($scope.form.tempNeeded == undefined) {
+                $scope.form.tempNeeded = false
+            }
+            if ($scope.form.temp == undefined) {
+                $scope.form.temp = 0.0
+            }
             $http.post(url, $scope.form)
                 .then(function(data) {
                     $scope.error = false;
